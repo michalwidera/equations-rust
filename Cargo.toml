@@ -1,0 +1,11 @@
+[package]
+name = "equations-rust"
+version = "0.1.0"
+authors = ["Michal Widera <michal@widera.com.pl>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+num = "*"
+num-rational = "*"
