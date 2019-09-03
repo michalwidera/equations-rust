@@ -22,8 +22,8 @@ fn main() {
     let vector_a : Vec<i32> = (0..10).map(|x| x).collect();
     let vector_b : Vec<i32> = (0..10).map(|x| -x).collect();
 
-    let array_a: [i32; 20] = array_init::array_init(|i| (i) as i32);
-    let array_b: [i32; 20] = array_init::array_init(|i| (i*(100)) as i32);
+    let array_a: [i32; 20] = array_init::array_init(|i| i as i32);
+    let array_b: [i32; 20] = array_init::array_init(|i| (i as i32)*(-1) as i32);
 
     let complex_integer = num::complex::Complex::new(10, 20);
     let complex_float = num::complex::Complex::new(10.1, 20.1);
