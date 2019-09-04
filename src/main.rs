@@ -25,12 +25,12 @@ fn sum( array_a: &[i32] , delta_a : num_rational::Rational  , array_b: &[i32] , 
     println!( "da {} | db {} | dc {}",delta_a,delta_b,delta_c );
 
     for i in 0..10 {
-        let idx = (num_rational::Ratio::from_integer(i)*delta_a/delta_c).floor() ;
-        print!("{} {} {} :", i , idx, num_rational::Ratio::from_integer(i) *delta_a);
         if delta_c == delta_a {
+            let idx = (num_rational::Ratio::from_integer(i)*delta_a/delta_b).floor() ;
             println!("[{}|{}]", array_a[i as usize] , array_b[*idx.numer() as usize]);
         }
         else {
+            let idx = (num_rational::Ratio::from_integer(i)*delta_b/delta_a).floor() ;
             println!("[{}|{}]", array_a[*idx.numer() as usize] , array_b[i as usize]);
         }
     }
@@ -52,7 +52,7 @@ fn main() {
     println!("Complex float: {}", complex_float);
 
     let r1 = num_rational::Ratio::new( 1 , 2 );
-    let r2 = num_rational::Ratio::new( 3 , 4 );
+    let r2 = num_rational::Ratio::new( 1 , 1 );
 
     println!("r1 = {}", r1);
     println!("r2 = {}", r2);
