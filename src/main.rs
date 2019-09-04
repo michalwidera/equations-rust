@@ -64,7 +64,7 @@ fn main() {
     println!("vector B {:?}", &vector_b);
 
     println!("Floor 1/2 = {}", delta_a.floor());
-    println!("Floor 1/2 = {}", delta_a.ceil());
+    println!("Ceil  1/2 = {}", delta_a.ceil());
 
     let v_result = sum(&vector_a, delta_a, &vector_b, delta_b);
     println!("sum: {:?}", v_result);
