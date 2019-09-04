@@ -2,7 +2,7 @@ use num::complex::Complex;
 use num_rational::Ratio;
 use num_rational::Rational;
 
-fn sum_vec(
+fn sum(
     vector_a: &Vec<i32>,
     delta_a: Rational,
     vector_b: &Vec<i32>,
@@ -25,7 +25,7 @@ fn sum_vec(
     result
 }
 
-fn hash_vec(
+fn hash(
     vector_a: &Vec<i32>,
     delta_a: Rational,
     vector_b: &Vec<i32>,
@@ -51,12 +51,6 @@ fn main() {
     let vector_a: Vec<i32> = (0..30).map(|x| x).collect();
     let vector_b: Vec<i32> = (0..30).map(|x| -x).collect();
 
-    let complex_integer = Complex::new(10, 20);
-    let complex_float = Complex::new(10.1, 20.1);
-
-    println!("Complex integer: {}", complex_integer);
-    println!("Complex float: {}", complex_float);
-
     let delta_a = Ratio::new(1, 2);
     let delta_b = Ratio::new(1, 1);
 
@@ -72,9 +66,9 @@ fn main() {
     println!("Floor 1/2 = {}", delta_a.floor());
     println!("Floor 1/2 = {}", delta_a.ceil());
 
-    let v_result = sum_vec(&vector_a, delta_a, &vector_b, delta_b);
-    println!("{:?}", v_result);
+    let v_result = sum(&vector_a, delta_a, &vector_b, delta_b);
+    println!("sum: {:?}", v_result);
 
-    let v_result = hash_vec(&vector_a, delta_a, &vector_b, delta_b);
-    println!("{:?}", v_result);
+    let v_result = hash(&vector_a, delta_a, &vector_b, delta_b);
+    println!("hash: {:?}", v_result);
 }
