@@ -25,12 +25,7 @@ fn sum(
     result
 }
 
-fn hash(
-    vector_a: &[i32],
-    delta_a: Rational,
-    vector_b: &[i32],
-    delta_b: Rational,
-) -> Vec<i32> {
+fn hash(vector_a: &[i32], delta_a: Rational, vector_b: &[i32], delta_b: Rational) -> Vec<i32> {
     let mut result = Vec::<i32>::new();
 
     let delta = delta_b / (delta_a + delta_b);
