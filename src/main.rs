@@ -3,9 +3,9 @@ use num_rational::Ratio;
 use num_rational::Rational;
 
 fn sum(
-    vector_a: &Vec<i32>,
+    vector_a: &[i32],
     delta_a: Rational,
-    vector_b: &Vec<i32>,
+    vector_b: &[i32],
     delta_b: Rational,
 ) -> Vec<(i32, i32)> {
     let mut result = Vec::<(i32, i32)>::new();
@@ -26,9 +26,9 @@ fn sum(
 }
 
 fn hash(
-    vector_a: &Vec<i32>,
+    vector_a: &[i32],
     delta_a: Rational,
-    vector_b: &Vec<i32>,
+    vector_b: &[i32],
     delta_b: Rational,
 ) -> Vec<i32> {
     let mut result = Vec::<i32>::new();
