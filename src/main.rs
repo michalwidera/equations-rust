@@ -18,7 +18,7 @@ fn print_array( array : &[i32] ) {
 }
 
 #[allow(unused_variables)]
-fn sum( array_a: &[i32] , delta_a : num_rational::Rational  , array_b: &[i32] , delta_b : num_rational::Rational  ) {
+fn sum_array( array_a: &[i32] , delta_a : num_rational::Rational  , array_b: &[i32] , delta_b : num_rational::Rational  ) {
 
     let delta_c = std::cmp::min( delta_a , delta_b );
 
@@ -34,6 +34,27 @@ fn sum( array_a: &[i32] , delta_a : num_rational::Rational  , array_b: &[i32] , 
             println!("[{}|{}]", array_a[*idx.numer() as usize] , array_b[i as usize]);
         }
     }
+}
+
+#[allow(unused_variables)]
+fn sum_vec( vector_a: &Vec<i32> , delta_a : num_rational::Rational  , vector_b: &Vec<i32> , delta_b : num_rational::Rational ) -> Vec::<(i32,i32)> {
+
+    let mut result = Vec::<(i32,i32)>::new();
+
+    let delta_c = std::cmp::min( delta_a , delta_b );
+
+    for i in 0..10 {
+        if delta_c == delta_a {
+            let idx = (num_rational::Ratio::from_integer(i)*delta_a/delta_b).floor() ;
+            result.push((vector_a[i as usize], vector_b[*idx.numer() as usize]));
+        }
+        else {
+            let idx = (num_rational::Ratio::from_integer(i)*delta_b/delta_a).floor() ;
+            result.push((vector_a[*idx.numer() as usize], vector_b[i as usize]));
+        }
+    }
+
+    result
 }
 
 #[allow(dead_code)]
@@ -71,5 +92,10 @@ fn main() {
     println!("Floor 4/3 = {}" , r2.floor());
     println!("Floor 4/3 = {}" , r2.ceil());
 
-    sum( &array_a , r1 , &array_b , r2 );
+    sum_array( &array_a , r1 , &array_b , r2 );
+
+    let v_result = sum_vec( &vector_a, r1, &vector_b, r2 );
+    for i in & v_result {
+        println!( "[{}|{}]" , i.0, i.1 )
+    }
 }
