@@ -40,27 +40,26 @@ fn hash(vec_a: &[isize], del_a: Rational, vec_b: &[isize], del_b: Rational) -> V
 }
 
 // testing on accelerated delta
-fn hash_test(vec_a: &[isize], vec_b: &[isize]) -> Vec<isize> {
-    fn del_a(n: isize) -> Rational {
-        Ratio::new(1, 2) + Ratio::new(n, 20)
-    }
-
-    fn del_b(n: isize) -> Rational {
-        Ratio::new(1, 1) + Ratio::new(n, 10)
-    }
-
-    fn z(n: isize) -> Rational {
-        del_b(n) / (del_a(n) + del_b(n))
+fn hash_test(
+    vec_a: &[isize],
+    del_a: impl Fn(isize) -> Rational,
+    vec_b: &[isize],
+    del_b: impl Fn(isize) -> Rational,
+) -> Vec<isize> {
+    macro_rules! z {
+        ($input:expr) => {
+            del_b($input) / (del_a($input) + del_b($input))
+        };
     }
 
     let mut result = Vec::<isize>::new();
 
     for i in 0..20 {
         let idx = Ratio::from_integer(i);
-        if (z(i) * idx).floor() == ((idx + 1) * z(i + 1)).floor() {
-            result.push(vec_b[*(idx - ((idx + 1) * z(i)).floor()).numer() as usize]);
+        if (z!(i) * idx).floor() == ((idx + 1) * z!(i + 1)).floor() {
+            result.push(vec_b[*(idx - ((idx + 1) * z!(i)).floor()).numer() as usize]);
         } else {
-            result.push(vec_a[*((idx * z(i)).floor()).numer() as usize]);
+            result.push(vec_a[*((idx * z!(i)).floor()).numer() as usize]);
         }
     }
 
@@ -92,6 +91,11 @@ fn main() {
     let v_result = hash(&vector_a, delta_a, &vector_b, delta_b);
     println!("hash: {:?}", v_result);
 
-    let v_result = hash_test(&vector_a, &vector_b);
+    let v_result = hash_test(
+        &vector_a,
+        |n| Ratio::new(1, 2) + Ratio::new(n, 20),
+        &vector_b,
+        |n| Ratio::new(1, 1) + Ratio::new(n, 10),
+    );
     println!("hash_test: {:?}", v_result);
 }
